@@ -1,0 +1,23 @@
+{
+  "title": "Phage Functional Protein Candidate Database v1.0（噬菌体功能蛋白候选数据库 v1.0）",
+  "description": "A prediction-level candidate database of phage functional proteins (depolymerases, endolysins, holins) with 4,117 candidates ranked by a six-dimension scoring scheme. Fields include functional annotation evidence (InterPro/Pfam/CDD/CAZy layer), structural evidence (AFDB homology, pLDDT, pocket features), host and genome classification, in silico substrate inference (non-definitive), and novelty/transferability scores. See README.md for the schema and reproduction queries.",
+  "upload_type": "dataset",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "phage",
+    "functional proteins",
+    "depolymerase",
+    "endolysin",
+    "holin",
+    "candidate database",
+    "AI-assisted discovery"
+  ],
+  "creators": [
+    {
+      "name": "LPS318",
+      "affiliation": ""
+    }
+  ],
+  "version": "v1.0.0",
+  "language": "eng"
+}
