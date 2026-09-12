@@ -1,0 +1,62 @@
+{
+  "summary": {
+    "n_total": 4117,
+    "classes": [
+      "depolymerase",
+      "holin",
+      "lysin"
+    ],
+    "leak_train_test_ids": 0,
+    "linear_probe": {
+      "val_acc": 0.9969788519637462,
+      "val_macro_f1": 0.9975433886608672,
+      "test_acc": 0.9972014925373134,
+      "test_macro_f1": 0.99680862806637,
+      "test_auc_ovr": 0.9985595463950356
+    },
+    "mlp": {
+      "val_acc": 0.9939577039274925,
+      "val_macro_f1": 0.9937341225224702,
+      "test_acc": 0.996268656716418,
+      "test_macro_f1": 0.9959550215789608,
+      "test_auc_ovr": 0.9999713080960873
+    },
+    "kmer_baseline": {
+      "test_acc": 0.45615671641791045,
+      "test_macro_f1": 0.20884048686739268
+    }
+  },
+  "per_class": {
+    "depolymerase": {
+      "precision": 1.0,
+      "recall": 0.9974424552429667,
+      "f1-score": 0.998719590268886,
+      "support": 391.0
+    },
+    "holin": {
+      "precision": 1.0,
+      "recall": 0.9895833333333334,
+      "f1-score": 0.9947643979057592,
+      "support": 192.0
+    },
+    "lysin": {
+      "precision": 0.9939024390243902,
+      "recall": 1.0,
+      "f1-score": 0.9969418960244648,
+      "support": 489.0
+    },
+    "accuracy": 0.9972014925373134,
+    "macro avg": {
+      "precision": 0.9979674796747968,
+      "recall": 0.9956752628587667,
+      "f1-score": 0.99680862806637,
+      "support": 1072.0
+    },
+    "weighted avg": {
+      "precision": 0.9972185566072078,
+      "recall": 0.9972014925373134,
+      "f1-score": 0.9972002904375034,
+      "support": 1072.0
+    }
+  }
+}

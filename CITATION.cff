@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this resource, please cite both the Zenodo record and the manuscript."
+title: "Phage Functional Protein Discovery — Candidate Database v2.0"
+type: dataset
+authors:
+  - family-names: "LPS318"
+    name-particle: ""
+    affiliation: ""
+version: "2.0.0"
+date-released: "2026-09-12"
+license: CC-BY-4.0
+keywords:
+  - phage
+  - depolymerase
+  - endolysin
+  - holin
+  - antibacterial protein
+  - AI-assisted discovery
+  - candidate database
+abstract: >-
+  A prediction-level candidate database of 4,117 phage antibacterial proteins
+  (depolymerases, endolysins, holins) with functional-annotation evidence,
+  structural evidence, host/serotype links, in-silico substrate inference,
+  novelty/transferability scores, and six-dimension ranking. Version 2.0 adds
+  sequence-level protein-language-model prediction with leakage-free frozen-set
+  evaluation (ESM-2 / ProtT5), strict APBS electrostatics and enrichment-based
+  conservation, host–serotype linking (Kaptive/PAst), and full-library novelty
+  against the entire AlphaFold DB plus dbCAN CAZyme annotation.
+# After creating the Zenodo deposit, replace the placeholder below with the real DOI.
+doi: "10.5281/zenodo.XXXXXXX"

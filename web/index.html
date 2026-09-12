@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phage Functional Protein Candidate DB v2.0</title>
+<style>
+  :root { --fg:#1a1a1a; --mut:#666; --line:#e3e3e3; --accent:#1F375A; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:-apple-system,"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif; color:var(--fg); }
+  header { background:var(--accent); color:#fff; padding:18px 24px; }
+  header h1 { margin:0 0 4px; font-size:20px; }
+  header p { margin:0; opacity:.85; font-size:13px; }
+  .wrap { max-width:1200px; margin:0 auto; padding:18px 24px 60px; }
+  .bar { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:14px 0; }
+  input, select, button { font-size:14px; padding:8px 10px; border:1px solid var(--line); border-radius:6px; }
+  input { min-width:260px; flex:1; }
+  button { background:var(--accent); color:#fff; border:none; cursor:pointer; }
+  button.ghost { background:#fff; color:var(--accent); border:1px solid var(--accent); }
+  .stats { display:flex; gap:18px; flex-wrap:wrap; font-size:13px; color:var(--mut); }
+  .stats b { color:var(--fg); }
+  table { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
+  th, td { border-bottom:1px solid var(--line); padding:7px 8px; text-align:left; white-space:nowrap; }
+  th { background:#f6f8fb; position:sticky; top:0; }
+  tbody tr:hover { background:#f9fbff; }
+  .muted { color:var(--mut); font-size:12px; }
+  code { background:#f2f4f7; padding:1px 4px; border-radius:4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Phage Functional Protein Candidate Database v2.0</h1>
+  <p>噬菌体功能蛋白候选库 v2.0 — 4,117 candidates (depolymerase / lysin / holin) · AI-assisted, prediction-level</p>
+</header>
+<div class="wrap">
+  <div class="stats" id="stats"><span>loading…</span></div>
+  <div class="bar">
+    <input id="q" placeholder="protein_id / host / genus / family (e.g. Klebsiella, PQ133613_14)">
+    <select id="cat">
+      <option value="">all categories</option>
+      <option>depolymerase</option><option>lysin</option><option>holin</option>
+    </select>
+    <select id="sort">
+      <option value="total_score">sort: total_score</option>
+      <option value="novelty">sort: novelty</option>
+      <option value="mean_plddt">sort: mean_plddt</option>
+      <option value="protein_length">sort: length</option>
+    </select>
+    <button onclick="run(0)">Search</button>
+    <button class="ghost" onclick="exportCsv()">Export CSV</button>
+  </div>
+  <div id="meta" class="muted"></div>
+  <div style="overflow:auto;max-height:70vh">
+    <table>
+      <thead><tr id="head"></tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <div class="bar" style="justify-content:center">
+    <button class="ghost" onclick="page(-1)">◀ prev</button>
+    <span id="pageinfo" class="muted"></span>
+    <button class="ghost" onclick="page(1)">next ▶</button>
+  </div>
+</div>
+<script>
+const SHOW = ["protein_id","category","host_raw","host_domain","genome_genus",
+              "protein_length","cazy_layer","fold_homolog","mean_plddt","n_pockets",
+              "novelty","transfer_value","total_score","func_evidence","struct_conf"];
+let LIMIT = 50, OFFSET = 0, TOTAL = 0;
+async function stats(){
+  const s = await (await fetch("/api/stats")).json();
+  const cats = Object.entries(s.by_category||{}).map(([k,v])=>`${k}: <b>${v}</b>`).join(" · ");
+  const hosts = Object.entries(s.top_hosts||{}).slice(0,5).map(([k,v])=>`${k}(${v})`).join(", ");
+  document.getElementById("stats").innerHTML =
+    `<span>total: <b>${s.total}</b></span><span>${cats}</span><span>top hosts: ${hosts}</span>`;
+}
+async function run(off){
+  OFFSET = Math.max(0, off);
+  const q = encodeURIComponent(document.getElementById("q").value.trim());
+  const cat = encodeURIComponent(document.getElementById("cat").value);
+  const sort = document.getElementById("sort").value;
+  const url = `/api/search?q=${q}&category=${cat}&sort=${sort}&order=desc&limit=${LIMIT}&offset=${OFFSET}`;
+  const d = await (await fetch(url)).json();
+  TOTAL = d.total||0;
+  document.getElementById("head").innerHTML = SHOW.map(h=>`<th>${h}</th>`).join("");
+  document.getElementById("rows").innerHTML = (d.rows||[]).map(r=>
+    "<tr>"+SHOW.map(h=>`<td>${(r[h]===null||r[h]===undefined)?"":String(r[h])}</td>`).join("")+"</tr>").join("");
+  document.getElementById("meta").textContent = `${d.count} shown / ${TOTAL} matched`;
+  document.getElementById("pageinfo").textContent = `rows ${OFFSET+1}–${OFFSET+(d.count||0)} of ${TOTAL}`;
+}
+function page(dir){ if(dir<0 && OFFSET===0) return; run(OFFSET + dir*LIMIT); }
+function exportCsv(){
+  const q = encodeURIComponent(document.getElementById("q").value.trim());
+  const cat = encodeURIComponent(document.getElementById("cat").value);
+  window.location = `/api/export.csv?q=${q}&category=${cat}`;
+}
+document.getElementById("q").addEventListener("keydown", e=>{ if(e.key==="Enter") run(0); });
+stats(); run(0);
+</script>
+</body>
+</html>

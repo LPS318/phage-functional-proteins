@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Models / large reference DBs (download, do not commit)
+*.dmnd
+*.hmm
+*_hmm
+hf/
+*.pt
+*.bin
+
+# Large intermediates
+*.dx
+*.pqr
+*.pdb.gz
+*.tar.gz
+*.zip
+
+# OS / editor
+.DS_Store
+._*
+*.swp
+.idea/
+.vscode/
+
+# Local scratch
+tmp/
+scratch/

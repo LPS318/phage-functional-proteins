@@ -1,0 +1,38 @@
+{
+  "title": "Phage Functional Protein Discovery — Candidate Database v2.0 (噬菌体功能蛋白 AI 发现 候选数据库 v2.0)",
+  "description": "<p>A prediction-level, reproducible resource for phage antibacterial proteins (depolymerases, endolysins, holins).</p><p><b>What's new in v2.0</b> (on top of the v1.0 candidate database of 4,117 entries):</p><ul><li><b>D1 — sequence-level AI prediction:</b> ESM-2 (650M) and ProtT5-XL embeddings with leakage-free evaluation on a <i>cluster-disjoint</i> frozen split. Three-family classification macro-F1 0.996–0.997; <b>antibacterial vs. background-decoy AUROC 0.993 (ESM-2) / 0.998 (ProtT5)</b>, AUPRC 0.973 / 0.994 vs. a 3-mer baseline (0.21).</li><li><b>D4 — structural strictification:</b> PDB2PQR(AMBER/PROPKA)+APBS(LPBE) strict electrostatic surfaces (grid auto-enclosing elongated 160–260 Å β-helix depolymerases) and 37-sequence-MSA conservation surfaces for five Class-1B enzymes.</li><li><b>D5 — host/serotype linking:</b> Kaptive (7 <i>A. baumannii</i> genomes) and PAst/PAST (6 <i>P. aeruginosa</i> genomes).</li><li><b>D6 — full-library novelty:</b> 522 queries searched against the <i>entire</i> AlphaFold DB (~200 M sequences) by DIAMOND — 95.8% have a substantial homolog, only 0.6% are true singletons; <b>dbCAN</b> assigns a CAZy family to 20.7% (dominated by GH90), with 45.0% having no CAZy hit. Novelty is framed at the functional level.</li></ul><p>Contents: <code>data/</code> (candidate DB v2.0 CSV+SQLite, frozen splits, D6 tables), <code>results/</code> (D1/D4/D5/D6 outputs and figures), <code>code/</code> (reproducible scripts), <code>figs/</code> (manuscript figures), <code>web/</code> (deployable FastAPI search app), <code>docs/</code> (methods + reproduction).</p><p><i>All entries are in-silico predictions; substrates and catalytic residues are inferred and require wet-lab validation.</i></p>",
+  "upload_type": "dataset",
+  "license": "CC-BY-4.0",
+  "access_right": "open",
+  "version": "2.0.0",
+  "language": "eng",
+  "keywords": [
+    "phage",
+    "antibacterial protein",
+    "depolymerase",
+    "endolysin",
+    "lysin",
+    "holin",
+    "protein language model",
+    "ESM-2",
+    "ProtT5",
+    "AlphaFold DB",
+    "dbCAN",
+    "CAZyme",
+    "Kaptive",
+    "PAst",
+    "AI-assisted discovery",
+    "candidate database"
+  ],
+  "creators": [
+    { "name": "LPS318", "affiliation": "" }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.21971299",
+      "relation": "isNewVersionOf",
+      "scheme": "doi"
+    }
+  ],
+  "notes": "Data under CC-BY-4.0; code under MIT (see LICENSE). Large third-party reference databases (AlphaFold DB, dbCAN, Kaptive/PAst) are not redistributed; download/resume instructions are in docs/REPRODUCE.md."
+}

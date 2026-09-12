@@ -1,0 +1,73 @@
+{
+  "summary": {
+    "n_total": 24526,
+    "classes": [
+      "decoy",
+      "depolymerase",
+      "holin",
+      "lysin"
+    ],
+    "leak_train_test_ids": 0,
+    "linear_probe": {
+      "val_acc": 0.9828380075345333,
+      "val_macro_f1": 0.8992331509396722,
+      "test_acc": 0.9763915547024952,
+      "test_macro_f1": 0.9397261219969335,
+      "test_auc_ovr": 0.994908985211564
+    },
+    "mlp": {
+      "val_acc": 0.9922561741314357,
+      "val_macro_f1": 0.9803111259204782,
+      "test_acc": 0.9854126679462571,
+      "test_macro_f1": 0.9720073628826809,
+      "test_auc_ovr": 0.9982778570645545
+    },
+    "kmer_baseline": {
+      "test_acc": 0.7942418426103647,
+      "test_macro_f1": 0.22133076593923834
+    },
+    "binary_vs_decoy": {
+      "test_auroc": 0.9929426393888459,
+      "test_auprc": 0.9728600633083576
+    }
+  },
+  "per_class": {
+    "decoy": {
+      "precision": 0.9870503597122302,
+      "recall": 0.9946834219429677,
+      "f1-score": 0.9908521906596052,
+      "support": 4138.0
+    },
+    "depolymerase": {
+      "precision": 0.9749303621169917,
+      "recall": 0.8951406649616368,
+      "f1-score": 0.9333333333333333,
+      "support": 391.0
+    },
+    "holin": {
+      "precision": 0.9946808510638298,
+      "recall": 0.9739583333333334,
+      "f1-score": 0.9842105263157894,
+      "support": 192.0
+    },
+    "lysin": {
+      "precision": 0.9756592292089249,
+      "recall": 0.983640081799591,
+      "f1-score": 0.9796334012219959,
+      "support": 489.0
+    },
+    "accuracy": 0.9854126679462571,
+    "macro avg": {
+      "precision": 0.9830802005254942,
+      "recall": 0.9618556255093822,
+      "f1-score": 0.9720073628826809,
+      "support": 5210.0
+    },
+    "weighted avg": {
+      "precision": 0.9853528304346204,
+      "recall": 0.9854126679462571,
+      "f1-score": 0.9852377835955791,
+      "support": 5210.0
+    }
+  }
+}
