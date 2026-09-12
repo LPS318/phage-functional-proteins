@@ -24,7 +24,7 @@ def cols():
     c.close()
     return names
 
-def q(sql, args=()):
+def run_sql(sql, args=()):
     c = sqlite3.connect(f"file:{DB}?mode=ro", uri=True); cur = c.cursor()
     cur.execute(sql, args); names = [d[0] for d in cur.description]
     rows = [dict(zip(names, r)) for r in cur.fetchall()]; c.close()
@@ -63,14 +63,14 @@ def search(q: str = Query(""), category: str = Query(""),
         args += [f"%{q}%"] * 4
     if category:
         where += " AND category = ?"; args.append(category)
-    total = q(f"SELECT COUNT(*) AS n FROM candidates {where}", args)[0]["n"]
-    rows = q(f"SELECT * FROM candidates {where} ORDER BY CAST({sort} AS REAL) {order} LIMIT ? OFFSET ?",
-             args + [limit, offset])
+    total = run_sql(f"SELECT COUNT(*) AS n FROM candidates {where}", args)[0]["n"]
+    rows = run_sql(f"SELECT * FROM candidates {where} ORDER BY CAST({sort} AS REAL) {order} LIMIT ? OFFSET ?",
+                   args + [limit, offset])
     return {"count": len(rows), "total": total, "rows": rows}
 
 @app.get("/api/candidate/{pid}")
 def candidate(pid: str):
-    rows = q("SELECT * FROM candidates WHERE protein_id = ?", [pid])
+    rows = run_sql("SELECT * FROM candidates WHERE protein_id = ?", [pid])
     return JSONResponse(rows[0] if rows else {"error": "not found"}, status_code=200 if rows else 404)
 
 @app.get("/api/export.csv")
@@ -79,7 +79,7 @@ def export(category: str = Query(""), q_: str = Query("", alias="q")):
     if category: where += " AND category=?"; args.append(category)
     if q_: where += " AND (protein_id LIKE ? OR host_raw LIKE ?)"; args += [f"%{q_}%"] * 2
     names = cols()
-    rows = q(f"SELECT * FROM candidates {where}", args)
+    rows = run_sql(f"SELECT * FROM candidates {where}", args)
     buf = io.StringIO(); w = csv.DictWriter(buf, fieldnames=names); w.writeheader(); w.writerows(rows)
     buf.seek(0)
     return StreamingResponse(iter([buf.getvalue()]), media_type="text/csv",
