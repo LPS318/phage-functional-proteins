@@ -1,6 +1,8 @@
 # Phage Functional Protein Discovery — Candidate Database v2.0
 # 噬菌体功能蛋白 AI 发现 — 候选数据库 v2.0
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22723156.svg)](https://doi.org/10.5281/zenodo.22723156)
+
 A reproducible, prediction-level resource for **phage antibacterial proteins**
 (depolymerases, endolysins/lysins, holins) discovered and ranked by an
 AI-assisted pipeline, together with **sequence-level prediction models**,
@@ -79,9 +81,20 @@ method summaries. Compute used CPU + a single A100 node; large reference DBs
 
 ## Citation
 
-If you use this resource, please cite the Zenodo release (DOI in
-[`CITATION.cff`](CITATION.cff) and on the release page) and the accompanying
-manuscript.
+If you use this resource, please cite the Zenodo record and the accompanying
+manuscript:
+
+```bibtex
+@dataset{lps318_phagefp_v2_2026,
+  title     = {Phage Functional Protein Discovery — Candidate Database v2.0},
+  author    = {LPS318},
+  year      = {2026},
+  version   = {2.0.0},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.22723156},
+  url       = {https://doi.org/10.5281/zenodo.22723156}
+}
+```
 
 ## License
 

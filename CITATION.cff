@@ -26,5 +26,4 @@ abstract: >-
   evaluation (ESM-2 / ProtT5), strict APBS electrostatics and enrichment-based
   conservation, host–serotype linking (Kaptive/PAst), and full-library novelty
   against the entire AlphaFold DB plus dbCAN CAZyme annotation.
-# After creating the Zenodo deposit, replace the placeholder below with the real DOI.
-doi: "10.5281/zenodo.XXXXXXX"
+doi: "10.5281/zenodo.22723156"
